@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <title>Roommate!</title>
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/css/materialize.min.css"  media="screen,projection"/>
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    
+  </head>
+
+  <body>
+
+    <div class="section no-pad-bot" id="index-banner">
+      <div class="container">
+
+        <br><br>
+        <h1 class="header center teal-text">Room-mate Finder</h1>
+            
+        
+        <div class="row center">
+          <h5 class="header col s12 light">A webapp to find your room-mate and wing-mates at IIT Bombay</h5>
+          <div class="col offset-s10"><a class="modal-trigger" style="color:teal" href="#modal1">More Info</a></div>
+        </div>
+        
+        <br><br>
+
+      </div>
+
+      <div class="container">
+        <div class="row">
+            <form id ="myform" action = "submit.php" class="col s12" method="post">
+
+              <div class="row">
+
+                <div class="input-field col s12 l3 offset-l3">
+                    <select id="hostel" name ="hostel">
+                      <option value="1">15 A</option>
+                      <option value="2">15 B</option>
+                      <option value="3">15 C</option>
+                      <option value="3">16 A</option>
+
+                    </select>
+                    <label>Hostel</label>
+                </div>
+
+                <div class="input-field col s12 l3">
+                  <input autocomplete="off" onchange="validateInput();" onkeyup="validateInput();" onpaste="validateInput();" oninput="validateInput();" id="roomno" name="roomno" type="text" class="validate">
+                  <label for="roomno">Alloted Room No</label>
+                </div>
+
+              </div>
+
+              <br><br>
+              <div class="row center">
+                <button type="submit" id="submit-button" class="btn-large waves-effect waves-light teal lighten-1 ">Find <i class="mdi-content-send right"></i></button>
+
+              </div>
+
+            </form>
+          </div>
+      </div>
+
+    </div>
+
+       
+
+      
+    
+
+    <div id="modal1" class="modal">
+      <div class="modal-content">
+        <h4 style="color:teal">About</h4>
+        <p>This app gets the information from the users itself (You!). 
+        If you don't find any roomate or wingmate at first, don't be disappointed. 
+        Instead, be sure to fill up your own information, and then check back up later. 
+        Hopefully, most of the students will fill it up and you can find your mates! Do spread the word about the app, because the more people 
+        who use it, the better chances of finding your roommate.
+         </p>
+      </div>
+      <div class="modal-footer">
+        <p class="right-align" style="padding-right: 12px">Developed by <span style="color:teal">Srajan Garg<span></p>
+      </div>
+    </div>
+
+
+
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.96.1/js/materialize.min.js"></script>
+    <script>
+       $("#submit-button").hide();
+    </script>
+
+
+    <script>
+
+    function validateInput() //(name,email,fbid)
+    { 
+
+      roomno = $("#roomno").val();
+      var w=false;
+
+      if( $.isNumeric(roomno) && roomno.length > 2 && roomno.length < 5)
+      { 
+        var num = parseInt(roomno)
+        var x = Math.floor(num/100);
+        var y = num%100;
+
+        if(x >=1 && x<=10 && y>=1 && y<=18)
+        {
+          w = true;
+        }
+        
+      }
+
+      if( w )
+      {
+        $("#submit-button").fadeIn(0);
+      }
+      else
+      {
+        $("#submit-button").fadeOut();
+      }
+    }
+
+    $(document).ready(function() {
+
+        $('.modal-trigger').leanModal();
+
+        document.getElementById("myform").reset();
+        
+        
+        
+        $('select').material_select();
+        $('#myform input').attr('style', '-webkit-box-shadow: inset 0 0 0 1000px #ffffff !important');
+
+    });
+    $('html').bind('keypress', function(e)
+    {
+       if(e.keyCode == 13)
+       {
+          return false;
+       }
+    });
+
+    </script>
+
+  </body>
+</html>						
